@@ -1,6 +1,15 @@
 ---
-export const prerender = false;
-console.log(process.cwd());
+// export const prerender = false;
+// console.log(process.cwd());
+
+let counter = 0;
+
+if (Astro.cookies.has('counter')) {
+	const cookie = Astro.cookies.get('counter');
+	counter = cookie.number() + 1;
+}
+
+Astro.cookies.set('counter', counter);
 ---
 
 <html lang="en">
@@ -12,6 +21,6 @@ console.log(process.cwd());
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<h1>Counter = {counter}</h1>
 	</body>
 </html>
